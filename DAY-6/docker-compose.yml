@@ -1,14 +1,16 @@
-version: '3'
+version: ‘3’
+
 services:
+
   frontend:
     build: ./frontend
     ports:
-      - "8080:80"
+      - “8080:80”
 
   backend:
     build: ./backend
     ports:
-      - "5000:5000"
+      - “5000:5000”
 
     depends_on:
       - mysql-db
@@ -18,16 +20,17 @@ services:
 
     container_name: mysql-db
 
+    restart: always
+
     environment:
       MYSQL_ROOT_PASSWORD: password123
       MYSQL_DATABASE: salesdb
 
     ports:
-      - "3306:3306"
+      - “3306:3306”
 
     volumes:
       - mysql-data:/var/lib/mysql
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 
 volumes:
   mysql-data:
